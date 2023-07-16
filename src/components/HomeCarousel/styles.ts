@@ -26,8 +26,8 @@ export const ContainerTextSlide = styled.div`
     align-items: center;
     height: 400px;
     padding: 3rem 10rem 5rem;
-    color: ${props => props.theme.colors.white};
-    background-color: ${props => props.theme.colors.green || '#43A838'};
+    color: var(--color-white);
+    background-color: var(--color-green-400);
     opacity: 0.7;
     font-size: 1.5rem;
 

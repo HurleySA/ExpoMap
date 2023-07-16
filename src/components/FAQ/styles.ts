@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const AccordionWrapper = styled.section`
-    background:  ${props => props.theme.colors.green};
+    background:  var(--color-green-400);
     opacity: 0.7;
     padding: 5rem 0rem;
     text-align: center;
@@ -14,6 +14,6 @@ export const Title = styled.span`
     font-size: 2rem;
     font-weight: 600 ;
     text-transform: uppercase;
-    color: ${props => props.theme.colors.white};
+    color: var(--color-white);
     margin-bottom: 1rem;
 `

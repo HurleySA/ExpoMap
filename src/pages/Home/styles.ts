@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-return */
 import styled from "styled-components";
 
 export const HomeStyle = styled.section`
@@ -37,8 +35,8 @@ export const ContainerIntro = styled.div`
     align-items: center;
     flex-direction: column;
     padding: 8rem 10rem;
-    color: ${props => props.theme.colors.white};
-    background-color: ${props => props.theme.colors.green || '#43A838'};
+    color: var(--color-white);
+    background-color:var(--color-green-200);
     opacity: 0.7;
     font-size: 2rem;
     font-weight: 600 ;

@@ -4,6 +4,15 @@ export const GlobalStyle = createGlobalStyle`
     :root {
         --color-orange-400: #CA4F2F;
         --color-orange-200: #f5967d;
+
+        --color-green-400: #43A838; 
+        --color-green-200: #7BC273;
+
+        --color-yellow-400: #F7D800;
+        --color-yellow-200: #F9E44C;
+
+        --color-blue-400: #002672;
+        --color-blue-200: #4C679C;
         
         --color-white: #FAFAFA;
         

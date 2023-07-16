@@ -11,7 +11,7 @@ export const Title = styled.span`
     font-size: 2rem;
     font-weight: 600 ;
     text-transform: uppercase;
-    color: ${props => props.theme.colors.green};
+    color: var(--color-green-400);
     margin-bottom: 1rem;
 `
 
@@ -21,7 +21,7 @@ export const EventItem = styled.div`
     gap: 2rem;
     border: 1px solid red;
     width: 100%;
-    border-color: ${props => props.theme.colors.green};
+    border-color: var(--color-green-400);
     padding: 2rem;
     border-radius: 1rem;
     margin-bottom: 1rem;

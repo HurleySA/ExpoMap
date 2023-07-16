@@ -4,14 +4,14 @@ export const Container = styled.section`
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    color: ${props => props.theme.colors.black};
+    color: var(--color-black);
     font-size: 1rem;
 
     label {
         margin-bottom: 8px;
         font-size: 0.8rem;
         font-weight: bold;
-        color: ${props => props.theme.colors.green};
+        color: var(--color-green-400);
     }
 
     p {

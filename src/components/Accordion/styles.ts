@@ -13,7 +13,7 @@ export  const Container = styled.div`
     -moz-box-shadow: -1px 1px 12px 0px var(--color-gray-400);    
 `
 export const AccordionWrapper = styled.section`
-    background:  ${props => props.theme.colors.green};
+    background:  var(--color-green-400);
     opacity: 0.7;
     padding: 5rem 0rem;
     text-align: center;
