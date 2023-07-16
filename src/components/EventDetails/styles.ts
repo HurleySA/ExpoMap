@@ -3,10 +3,8 @@ import styled from "styled-components";
 export const Container = styled.section`
     display: flex;
     flex-direction: column;
-    margin-top: 2rem;
     align-items: center;
-    margin-bottom: 20px;
-
+    padding: 2rem 0;
 `
 
 export const Title = styled.span`

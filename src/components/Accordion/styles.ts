@@ -7,10 +7,10 @@ export  const Container = styled.div`
     background: var(--color-white);
     padding: 4rem;
     border-radius: .5rem;
+    width: 100%;
     box-shadow: -1px 1px 12px 0px var(--color-gray-400);
     -webkit-box-shadow: -1px 1px 12px 0px var(--color-gray-400);
-    -moz-box-shadow: -1px 1px 12px 0px var(--color-gray-400);
-    
+    -moz-box-shadow: -1px 1px 12px 0px var(--color-gray-400);    
 `
 export const AccordionWrapper = styled.section`
     background:  ${props => props.theme.colors.green};
@@ -18,13 +18,7 @@ export const AccordionWrapper = styled.section`
     padding: 5rem 0rem;
     text-align: center;
     transition: all 0.6s ease-in-out;
-
-    h2{   
-        color: var(--color-white);
-        text-transform: uppercase;
-        font-weight: 900;
-        padding:  0rem 0rem 3rem 0;
-        font-size: 2.25rem;
-
-    }
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
 `

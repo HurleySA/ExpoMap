@@ -1,5 +1,9 @@
 import { ReactNode } from "react";
 
+export interface IAccordionProps {
+    listFAQ: IFrequencyQuestion[]
+}
+
 export interface IButtonProps {
     children: ReactNode;
     theme: "green" | "white";
@@ -9,7 +13,7 @@ export interface IButtonProps {
 
 export interface ButtonThemeProps {
     theme: "green" | "white";
-    hasBorder: boolean,
+    hasBorder?: boolean,
 }
 
 export interface IEvent {
@@ -48,4 +52,9 @@ export interface ISchedule {
 export interface IShow {
     band: string,
     hour?: string 
+}
+export interface IFrequencyQuestion { 
+    id: string,
+    question: string,
+    aswer: string
 }

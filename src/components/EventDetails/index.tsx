@@ -27,8 +27,7 @@ export const EventDetails = () => {
                     </Row>
                 </EventItem>
              ) )}
-        <Button theme="white" hasBorder  onClick={() => navigate("/list")}>Ver mais</Button>
-       
+            <Button theme="white" hasBorder  onClick={() => navigate("/list")}>Ver mais</Button> 
         </Container>
     )
 }

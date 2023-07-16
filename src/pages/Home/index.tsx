@@ -1,7 +1,7 @@
 import { BlueSpan, ContainerIntro, HomeStyle, YellowSpan } from "./styles";
 import { HomeCarousel } from "../../components/HomeCarousel";
 import { EventDetails } from "../../components/EventDetails";
-import { Accordion } from "../../components/Accordion";
+import { FAQ } from "../../components/FAQ";
 
 
 export const Home: React.FC = () => {
@@ -15,7 +15,7 @@ export const Home: React.FC = () => {
             </ContainerIntro>
             <HomeCarousel/>
             <EventDetails />
-            <Accordion />
+            <FAQ />
 
 
         </HomeStyle>
