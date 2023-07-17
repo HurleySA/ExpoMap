@@ -35,7 +35,6 @@ export const ContainerTextSlide = styled.div`
       padding: 3rem 4rem 5rem;
       font-size: 1.2rem;
     }
-    
 `
 
 const fadeRightAnimation = keyframes`
