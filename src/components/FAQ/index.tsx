@@ -37,7 +37,7 @@ export const FAQ: React.FC = () => {
     
     ]
     return (
-        <AccordionWrapper> 
+        <AccordionWrapper id='faq'> 
             <Title>Perguntas Frequentes</Title >
             <Accordion listFAQ={listFAQ} />
     

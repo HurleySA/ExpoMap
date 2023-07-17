@@ -37,21 +37,20 @@ export const ContainerIntro = styled.div`
     padding: 8rem 10rem;
     color: var(--color-white);
     background-color:var(--color-green-200);
-    opacity: 0.7;
     font-size: 2rem;
     font-weight: 600 ;
     text-transform: uppercase;
 `
 
 export const YellowSpan = styled.div`
-    color: rgba(247, 216, 0,1);
+    color: var(--color-yellow-200);
     padding: 0 0.5rem;
     font-weight: bold;
     font-size: 2.2rem;
     `
 export const BlueSpan = styled.span`
     padding: 0 0 0 0.5rem;
-    color: rgba(0, 38, 114, 1);
+    color: var(--color-blue-400);
     font-weight: bold;
     font-size: 2.2rem;
 `

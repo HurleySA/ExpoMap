@@ -34,7 +34,7 @@ export const ContainerTextSlide = styled.div`
     @media (max-width: 768px) {
       padding: 3rem 4rem 5rem;
       font-size: 1.2rem;
-  }
+    }
     
 `
 

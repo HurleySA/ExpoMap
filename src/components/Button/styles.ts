@@ -19,7 +19,7 @@ const configColorBackground: IConfigColorBackground = {
 } 
 const getColor = (theme: string) => configColor[theme] || '#000000'
 
-const getBackgroudColor = (hasBorder: boolean, theme: string) => hasBorder ? configColorBackground[theme] || '#fafafa' : 'transparent' 
+const getBackgroudColor = (theme: string, hasBorder?: boolean) => hasBorder ? configColorBackground[theme] || '#fafafa' : 'transparent' 
 
 
 export const ButtonStyled = styled.button<ButtonThemeProps>`
@@ -31,11 +31,13 @@ export const ButtonStyled = styled.button<ButtonThemeProps>`
         font-weight: 500;
         border: none;
         border-radius: .5rem;
-        color: ${(props) => getColor(props.theme)
-        };;
-        background-color: ${(props) => getBackgroudColor(props.hasBorder, props.theme)
-        };
+        color: ${(props) => getColor(props.theme)};
+        background-color: ${(props) => getBackgroudColor(props.theme, props.hasBorder)};
         box-sizing: border-box;
         padding: .5rem 1rem;
         box-shadow:  ${(props) => props.hasBorder && `0px 5px 10px 0px var(--color-gray-400)`};
+
+        &:hover {
+                color: var(--color-yellow-200);
+        }
 `

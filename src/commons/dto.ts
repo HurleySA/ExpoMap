@@ -9,11 +9,13 @@ export interface IButtonProps {
     theme: "green" | "white";
     [x:string]: any;
     hasBorder?: boolean,
+    hasBorderBotton?: boolean,
 }
 
 export interface ButtonThemeProps {
     theme: "green" | "white";
     hasBorder?: boolean,
+    hasBorderBotton?: boolean,
 }
 
 export interface IEvent {

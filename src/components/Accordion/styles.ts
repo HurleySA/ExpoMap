@@ -14,7 +14,6 @@ export  const Container = styled.div`
 `
 export const AccordionWrapper = styled.section`
     background:  var(--color-green-400);
-    opacity: 0.7;
     padding: 5rem 0rem;
     text-align: center;
     transition: all 0.6s ease-in-out;
