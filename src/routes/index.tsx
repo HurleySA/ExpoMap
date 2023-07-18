@@ -3,6 +3,7 @@ import { Home } from '../pages/Home'
 import { NotFound } from '../pages/NotFound'
 import App from '../App'
 import { About } from '../pages/About'
+import { Schedule } from '../pages/Schedule'
 
 export const router = createBrowserRouter([
     {
@@ -17,6 +18,10 @@ export const router = createBrowserRouter([
             {
                 path:'/sobre',
                 element: <About/>,
+            },
+            {
+                path:'/programacao',
+                element: <Schedule/>,
             },
             {
                 path:'*',

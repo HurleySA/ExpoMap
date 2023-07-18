@@ -8,7 +8,6 @@ export const Container = styled.section`
     font-size: 1rem;
 
     label {
-        margin-bottom: 8px;
         font-size: 0.8rem;
         font-weight: bold;
         color: var(--color-green-400);
@@ -16,6 +15,6 @@ export const Container = styled.section`
 
     p {
         line-height: 1.3rem;
-        margin-bottom: 1.3rem;
+        margin-bottom: 0.5rem;
     }
 `

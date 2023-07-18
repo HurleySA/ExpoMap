@@ -29,7 +29,7 @@ export const Header: React.FC = () => {
         return (
             <>
                 <Button theme="green" onClick={() => navigate("/sobre")} >Sobre</Button>
-                <Button theme="green" onClick={() => navigate("/list")} >Programação</Button>
+                <Button theme="green" onClick={() => navigate("/programacao")} >Programação</Button>
                 <Button theme="green" onClick={() => navigate("/list")} >Participe</Button>
                 { isHomePage && <Button theme="green" onClick={handleScrollClick} >FAQ</Button>}
             </>
