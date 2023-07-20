@@ -30,7 +30,7 @@ export const Header: React.FC = () => {
             <>
                 <Button theme="green" onClick={() => navigate("/sobre")} >Sobre</Button>
                 <Button theme="green" onClick={() => navigate("/programacao")} >Programação</Button>
-                <Button theme="green" onClick={() => navigate("/list")} >Participe</Button>
+                <Button theme="green" onClick={() => navigate("/participate")} >Participe</Button>
                 { isHomePage && <Button theme="green" onClick={handleScrollClick} >FAQ</Button>}
             </>
         )

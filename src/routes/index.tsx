@@ -6,6 +6,7 @@ import { About } from '../pages/About'
 import { Schedule } from '../pages/Schedule'
 import { ScheduleByEvent } from '../pages/ScheduleByEvent'
 import { DetailsByEvent } from '../pages/DetailsByEvent'
+import { ParticipateEvent } from '../pages/Participate'
 
 export const router = createBrowserRouter([
     {
@@ -32,6 +33,10 @@ export const router = createBrowserRouter([
             {
                 path:'/detalhes/:id',
                 element: <DetailsByEvent/>,
+            },
+            {
+                path:'/participate',
+                element: <ParticipateEvent/>,
             },
             {
                 path:'*',

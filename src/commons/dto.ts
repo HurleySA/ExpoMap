@@ -20,6 +20,11 @@ export interface ButtonThemeProps {
     hasBorderBotton?: boolean,
 }
 
+export interface ParticipateOptionProps {
+    isActive: boolean;
+}
+
+
 export interface IEvent {
     id: string
     name: string,
