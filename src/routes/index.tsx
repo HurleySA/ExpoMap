@@ -4,6 +4,7 @@ import { NotFound } from '../pages/NotFound'
 import App from '../App'
 import { About } from '../pages/About'
 import { Schedule } from '../pages/Schedule'
+import { ScheduleByEvent } from '../pages/ScheduleByEvent'
 
 export const router = createBrowserRouter([
     {
@@ -22,6 +23,10 @@ export const router = createBrowserRouter([
             {
                 path:'/programacao',
                 element: <Schedule/>,
+            },
+            {
+                path:'/programacao/:id',
+                element: <ScheduleByEvent/>,
             },
             {
                 path:'*',

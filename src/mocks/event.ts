@@ -1,6 +1,7 @@
 import { IEvent } from "../commons/dto";
 
 const event1: IEvent = {
+    id: '1',
     name: "Evento 1",
     address: {
       city: "Recife",
@@ -49,6 +50,7 @@ const event1: IEvent = {
   };
   
   const event2: IEvent = {
+    id: '2',
     name: "Evento 2",
     address: {
       city: "Fortaleza",

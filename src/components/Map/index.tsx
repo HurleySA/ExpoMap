@@ -1,8 +1,11 @@
 import { useState } from 'react';
-import { FilterContainer, FilterContentContainer, FilterItem, FilterMapContainer, FilterOptionsContainer, MapContainer } from './styles';
+import { FilterContainer, FilterContentContainer, FilterItem, FilterMapContainer, FilterOptionsContainer, MapContainer, ModalMarker } from './styles';
 import { Checkbox, Loader } from "@mantine/core"
 import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api';
 import { listEvents } from '../../mocks/event.ts'
+import { IEvent } from '../../commons/dto.ts';
+import { Button } from '../Button/index.tsx';
+import { Link } from 'react-router-dom';
 
 const containerStyle = {
     width: '100%',
@@ -14,12 +17,48 @@ const center = {
     lng: -40.77,
   };
 
+interface IStateName {
+    [key:string]: string
+}
+
+const stateName : IStateName = {
+    "AL": 'Alagoas',
+    "BA": 'Bahia',
+    "PB": 'Paraiba',
+    "RN": 'Rio Grande do Norte',
+    "CE": 'Ceara',
+    "MA": 'Maranhão',
+    "PE": 'Pernambuco',
+    "PI": 'Piaui',
+    "SE": 'Sergipe',
+}
+
+
+const getListOfState = () => {
+    const states: string[] = [];
+
+    for (const event of listEvents) {
+        if (event.address.state && !states.includes(event.address.state)) {
+            states.push(event.address.state);
+        }
+    }
+    return states;
+}
+const listOfStates = getListOfState()
+
 export const Map = () => {
     const [state, setStates] = useState<string[]>([]);
+    const [showFilterOptions, setShowFilterOptions] = useState<boolean>(true);
+    const [modalOptionsEvent, setModalOptionsEvent] = useState<boolean>(false);
+    const [eventToShow, setEventToShow] = useState<IEvent | null>(null);
 
+    const toggleFilterOptions = () => {
+        setShowFilterOptions(!showFilterOptions);
+    };
+    
     const handleChange = (value: string[]) => {
         if(value.length > state.length) {
-            value.includes('ALL') ? setStates(['ALL', 'PB', 'CE', 'PE']) : setStates(value)
+            value.includes('ALL') ? setStates(['ALL', ...listOfStates]) : value.length === listOfStates.length ? setStates(['ALL', ...value]) :  setStates(value)
            
         } else {
             if(value.includes('ALL')) {
@@ -29,31 +68,44 @@ export const Map = () => {
                 setStates(value)
             }
         }
-        console.log(value, state)
     };
+
+    const handleClickEvent = (event: IEvent) => {
+        setEventToShow(event);
+        setModalOptionsEvent(true)
+    }
+
     
     const { isLoaded } = useJsApiLoader({
-
         id: 'google-map-script',
         googleMapsApiKey: "AIzaSyBjuKYUqPX-qUHkXeLVxQ5MMacCEAIl2QI"
       })
-
     return (
         <>
          {isLoaded ? (
         <FilterMapContainer className='container'>
           <MapContainer>
+            {
+                (modalOptionsEvent && eventToShow) &&
+                <ModalMarker>
+                    <span onClick={() => setModalOptionsEvent(false)}>X</span>
+                    <p>{eventToShow.name}</p>
+                    <Link to={`/programacao/${eventToShow.id}`}>
+                        <Button theme='white' hasBorder>Programação</Button>
+                    </Link>
+                    <Button theme='white' hasBorder>Detalhes</Button>
+                    <Button theme='white' hasBorder>Participe</Button>
+                </ModalMarker>
+            }
             <FilterContainer>
-                <FilterContentContainer>
+                <FilterContentContainer  onClick={toggleFilterOptions}>
                     <img src="/filtro.png" alt="Icone de filtro" />
                     <p>Filtrar por estado</p>
                 </FilterContentContainer>
-                <FilterOptionsContainer>
+                <FilterOptionsContainer className={showFilterOptions ? '' : 'disable'}>
                     <Checkbox.Group value={state} onChange={handleChange}>
                         <Checkbox value="ALL" label="Todos"/>
-                        <Checkbox value='PB' label="Paraiba"/>
-                        <Checkbox value='PE' label="Pernambuco"/>
-                        <Checkbox value='CE'  label="Ceara"/>
+                        { listOfStates.map(state => <Checkbox key={state} className='checkbox' value={state} label={stateName[state]}/>)}
                     </Checkbox.Group>
                 </FilterOptionsContainer>
             </FilterContainer>
@@ -62,7 +114,11 @@ export const Map = () => {
               center={center} 
               zoom={5}
               >
-                   {listEvents.map(event => (state.includes('ALL') || state.includes(event.address.state)) && <Marker onClick={() => console.log(event)} position={{ lat: event.address.latitude , lng: event.address.longitude }}> </Marker>)}
+                   {listEvents.map(event => (state.includes('ALL') || state.includes(event.address.state)) && 
+                    <Marker title='bom dia'  key={event.name} onClick={() => handleClickEvent(event)} 
+                    position={{ lat: event.address.latitude , lng: event.address.longitude }}> 
+                    </Marker>
+                   )}
             </GoogleMap>
           
           </MapContainer>

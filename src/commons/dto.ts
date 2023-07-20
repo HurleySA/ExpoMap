@@ -1,5 +1,7 @@
 import { ReactNode } from "react";
-
+export interface IEventDetailsCompleteProps {
+    event: IEvent
+}
 export interface IAccordionProps {
     listFAQ: IFrequencyQuestion[]
 }
@@ -19,6 +21,7 @@ export interface ButtonThemeProps {
 }
 
 export interface IEvent {
+    id: string
     name: string,
     address: IAddress,
     startDate: string,
