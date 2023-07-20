@@ -1,11 +1,12 @@
-import styled from "styled-components";
+import { styled } from "styled-components";
 
 export const Container = styled.section`
+    width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    padding: 2rem 0;
+    align-items: flex-start;
 `
+
 export const Title = styled.span`
     font-size: 2rem;
     font-weight: 600 ;

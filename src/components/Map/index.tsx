@@ -5,7 +5,7 @@ import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api';
 import { listEvents } from '../../mocks/event.ts'
 import { IEvent } from '../../commons/dto.ts';
 import { Button } from '../Button/index.tsx';
-import { Link } from 'react-router-dom';
+import {  useNavigate } from 'react-router-dom';
 
 const containerStyle = {
     width: '100%',
@@ -52,6 +52,7 @@ export const Map = () => {
     const [modalOptionsEvent, setModalOptionsEvent] = useState<boolean>(false);
     const [eventToShow, setEventToShow] = useState<IEvent | null>(null);
 
+    const navigate = useNavigate()
     const toggleFilterOptions = () => {
         setShowFilterOptions(!showFilterOptions);
     };
@@ -90,10 +91,8 @@ export const Map = () => {
                 <ModalMarker>
                     <span onClick={() => setModalOptionsEvent(false)}>X</span>
                     <p>{eventToShow.name}</p>
-                    <Link to={`/programacao/${eventToShow.id}`}>
-                        <Button theme='white' hasBorder>Programação</Button>
-                    </Link>
-                    <Button theme='white' hasBorder>Detalhes</Button>
+                    <Button theme='white' hasBorder><div onClick={() => navigate(`/programacao/${eventToShow.id}`)}>Programação</div></Button>
+                    <Button theme='white' hasBorder><div onClick={() => navigate(`/detalhes/${eventToShow.id}`)}>Detalhes</div></Button>
                     <Button theme='white' hasBorder>Participe</Button>
                 </ModalMarker>
             }

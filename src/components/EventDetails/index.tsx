@@ -9,10 +9,11 @@ export const EventDetails = () => {
 
     const getIsPaidString = (typeEntrance: string) => typeEntrance === 'free' ? 'Não' : 'Sim' ;
     const navigate = useNavigate()
+    const firstTwoEvents = listEvents.slice(0, 3);
     return (
         <Container className="container">
             <Title>Próximos eventos</Title>
-            {listEvents.map(event => (
+            {firstTwoEvents.map(event => (
                 <EventItem>
                     <Row>
                         <Information label="Nome do Evento" value={event.name} />
@@ -27,7 +28,7 @@ export const EventDetails = () => {
                     </Row>
                 </EventItem>
              ) )}
-            <Button theme="white" hasBorder  onClick={() => navigate("/list")}>Ver mais</Button> 
+            <Button theme="white" hasBorder  onClick={() => navigate("/programacao")}>Ver mais</Button> 
         </Container>
     )
 }

@@ -18,7 +18,8 @@ export const Accordion: React.FC<IAccordionProps> = ({ listFAQ } ) => {
                    },
                    panel: {
                     fontWeight: 'bold',
-                    fontSize: '1rem'
+                    fontSize: '1rem',
+                    color: '#002672',
                    }
                 }}  defaultValue={listFAQ[0].id}>
                     {listFAQ.map(faqItem => (

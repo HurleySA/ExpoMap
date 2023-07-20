@@ -5,6 +5,7 @@ import App from '../App'
 import { About } from '../pages/About'
 import { Schedule } from '../pages/Schedule'
 import { ScheduleByEvent } from '../pages/ScheduleByEvent'
+import { DetailsByEvent } from '../pages/DetailsByEvent'
 
 export const router = createBrowserRouter([
     {
@@ -27,6 +28,10 @@ export const router = createBrowserRouter([
             {
                 path:'/programacao/:id',
                 element: <ScheduleByEvent/>,
+            },
+            {
+                path:'/detalhes/:id',
+                element: <DetailsByEvent/>,
             },
             {
                 path:'*',
