@@ -93,7 +93,11 @@ export const Map = () => {
                     <p>{eventToShow.name}</p>
                     <Button theme='white' hasBorder><div onClick={() => navigate(`/programacao/${eventToShow.id}`)}>Programação</div></Button>
                     <Button theme='white' hasBorder><div onClick={() => navigate(`/detalhes/${eventToShow.id}`)}>Detalhes</div></Button>
-                    <Button theme='white' hasBorder>Participe</Button>
+                    <Button theme='white' hasBorder onClick={() => navigate(`/participate`, {
+                        state: {
+                            eventId: eventToShow.id
+                        }
+                    })}>Participe</Button>
                 </ModalMarker>
             }
             <FilterContainer>

@@ -33,9 +33,9 @@ export const ContainerOptions = styled.div`
     display: flex;
 `
 
-const getColor = (isActive: boolean) => isActive ? '#43A838' : '#fafafa';
+const getColor = (isActive: boolean) => isActive ? '#fafafa' : '#43A838';
 
-const getBackgroudColor = (isActive: boolean) => isActive ? '#fafafa' : '#43A838' ;
+const getBackgroudColor = (isActive: boolean) => isActive ? '#43A838' : '#fafafa' ;
 
 
 export const ItemOption = styled.span<ParticipateOptionProps>`
@@ -58,7 +58,7 @@ export const ItemOption = styled.span<ParticipateOptionProps>`
     }
 `
 
-export const Teste = styled.div`
+export const ContaineForm = styled.div`
     display: flex;
     flex-direction: column;
     border: 1px solid red;

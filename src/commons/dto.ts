@@ -46,7 +46,7 @@ export interface IEvent {
 
 export interface IAddress {
     city: string,
-    state: 'AL' | 'BA' | 'PB' | 'RN' | 'CE' | 'MA' | 'PE' | 'PI' | 'SE',
+    state: 'AL' | 'BA' | 'PB' | 'RN' | 'CE' | 'MA' | 'PE' | 'PI' | 'SE' | '',
     street: string,
     neighborhood: string,
     number: number | 'S/N',

@@ -1,10 +1,13 @@
 import { useState } from 'react'
-import {  Container, ContainerChoices, ItemOption, SubTitleSelect, Teste, Title } from "./styles"
-import { GetInTouchSimple } from '../../components/FormAdministrator'
+import {  Container, ContainerChoices, ItemOption, SubTitleSelect, ContaineForm, Title } from "./styles"
+import { FormAdministrator } from '../../components/FormAdministrator'
+import { FormExhibitor } from '../../components/FormExhibitor'
+import { useLocation } from 'react-router-dom'
 
 export const ParticipateEvent: React.FC = () => {
     const [typeForm, setTypeForm] = useState<'exhibitor' | 'administrator'>('exhibitor')    
-
+    const location = useLocation()
+    const eventId: string = location?.state?.eventId;
     const toggleTypeForm = () => {
         typeForm === 'exhibitor' ? setTypeForm('administrator') : setTypeForm('exhibitor');
     }
@@ -16,9 +19,9 @@ export const ParticipateEvent: React.FC = () => {
                 <ItemOption isActive={typeForm === 'exhibitor'} onClick={toggleTypeForm} >Expositor</ItemOption>  
                 <ItemOption isActive={typeForm === 'administrator'} onClick={toggleTypeForm} >Administrador</ItemOption>
             </ContainerChoices>
-            <Teste>
-                <GetInTouchSimple />  
-            </Teste>
+            <ContaineForm>
+                {typeForm === 'exhibitor' ? <FormExhibitor eventId={eventId}/>   : <FormAdministrator />  }
+            </ContaineForm>
         </Container>
         
         
