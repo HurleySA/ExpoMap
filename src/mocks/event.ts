@@ -13,7 +13,7 @@ const event1: IEvent = {
       longitude: -34.567890,
     },
     startDate: "2023-07-01",
-    endDate: "2023-07-05",
+    endDate: "2024-07-05",
     openningHour: "09:00",
     closeHour: "18:00",
     typeEntrance: "paid",

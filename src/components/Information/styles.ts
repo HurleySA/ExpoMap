@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Container = styled.section`
+export const Container = styled.div`
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -8,9 +8,10 @@ export const Container = styled.section`
     font-size: 1rem;
 
     label {
-        font-size: 0.8rem;
+        font-size: 1rem;
         font-weight: bold;
         color: var(--color-green-400);
+        text-align: start;
     }
 
     p {

@@ -23,7 +23,7 @@ export const Accordion: React.FC<IAccordionProps> = ({ listFAQ } ) => {
                    }
                 }}  defaultValue={listFAQ[0].id}>
                     {listFAQ.map(faqItem => (
-                        <MantineAccordion.Item value={faqItem.id}>
+                        <MantineAccordion.Item key={faqItem.id} value={faqItem.id}>
                            <MantineAccordion.Control>{faqItem.question}</MantineAccordion.Control>
                            <MantineAccordion.Panel>{faqItem.aswer}</MantineAccordion.Panel>
                        </MantineAccordion.Item>

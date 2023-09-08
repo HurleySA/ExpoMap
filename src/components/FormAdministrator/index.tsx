@@ -5,12 +5,7 @@ import { getInitialValueAdministrator } from './utils';
 export const FormAdministrator: React.FC = () => {
   const initialValues = getInitialValueAdministrator();
   const form = useForm({
-    initialValues,
-/*     validate: {
-      name: (value) => value.trim().length < 2,
-      email: (value) => !/^\S+@\S+$/.test(value),
-      subject: (value) => value.trim().length === 0,
-    }, */
+    initialValues
   });
 
   return (
@@ -214,7 +209,7 @@ export const FormAdministrator: React.FC = () => {
 
       <Group position="center" mt="xl">
         <Button type="submit" size="md" color='green'>
-          Send message
+          Solicitar
         </Button>
       </Group>
     </form>

@@ -13,6 +13,10 @@ export interface IButtonProps {
     hasBorder?: boolean,
     hasBorderBotton?: boolean,
 }
+export interface IFilterProps {
+    mapView: boolean,
+    setMapView: React.Dispatch<React.SetStateAction<boolean>>
+}
 
 export interface ButtonThemeProps {
     theme: "green" | "white";
@@ -67,4 +71,8 @@ export interface IFrequencyQuestion {
     id: string,
     question: string,
     aswer: string
+}
+
+export interface IStateName {
+    [key:string]: string
 }

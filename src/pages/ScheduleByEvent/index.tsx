@@ -13,7 +13,7 @@ export const ScheduleByEvent: React.FC = () => {
         <Container className="container">
             {event ? 
              <>
-             <Title>Programação completo {event.name}</Title>
+             <Title>Programação de shows {event.name}</Title>
              <ShowList event={event} /> 
              </>
              : 

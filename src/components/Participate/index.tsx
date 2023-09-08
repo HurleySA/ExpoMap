@@ -21,8 +21,8 @@ export const Participate = () => {
                 </ParticipateItem>
                 <ParticipateItem>
                     <TitleParticipateItem>Turista</TitleParticipateItem>
-                    <Typography>Você pode acessar informações de programação clicando no botão abaixo</Typography>
-                    <Button theme="white" hasBorder><div onClick={() => navigate('/programacao')}>Ver programação</div></Button>
+                    <Typography>Você pode acessar informações dos eventos clicando no botão abaixo</Typography>
+                    <Button theme="white" hasBorder><div onClick={() => navigate('/programacao')}>Ver eventos</div></Button>
                 </ParticipateItem>
             </ContainerParticipateItems>
         </Container>

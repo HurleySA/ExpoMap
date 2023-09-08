@@ -23,7 +23,7 @@ export const ShowList: React.FC<IEventDetailsCompleteProps>  = ({event}) =>  {
                     <ContainerShow key={schedule.date}>
                         <TitleShowDate>{getDateString(schedule.date)}</TitleShowDate>
                         {schedule.shows.map(show => (
-                            <ShowDetailsContainer>
+                            <ShowDetailsContainer key={show.band}>
                                 <p>{show.band}</p>
                                 {show.hour ? <p>{show.hour} horas.</p> : <p>-</p>}
                             </ShowDetailsContainer>

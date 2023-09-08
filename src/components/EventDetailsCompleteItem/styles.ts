@@ -31,8 +31,48 @@ export const TitleSection = styled.span`
 export const FlexItem = styled.div`
     flex-basis: 30%;
     max-width: 30%;
+
+    @media (max-width: 768px) {
+        flex-basis: 40%;
+        max-width: 40%;
+    }
+
+    @media (max-width: 600px) {
+        flex-basis: 100%;
+        max-width: 100%;
+    }
 `;
 
 export const ContainerButton = styled.div`
     width: 200px;
+`
+
+export const ContainerResumeItem = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+`
+
+export const ArrowIcon = styled.span`
+    font-size: 2rem;
+
+    &:hover {
+        cursor: pointer;
+    }
+`
+
+export const ContainerResumeInfo = styled.div`
+    display: flex;
+    justify-content: flex-start;
+    gap: 1rem;
+    align-items: center;
+    flex-wrap: wrap;
+    font-size: 2rem;
+`
+
+export const BorderBox = styled.div`
+    background-color: var(--color-gray-400);
+    height: 1px;
+    max-width: 300px;
+    margin: 1rem 0;
 `

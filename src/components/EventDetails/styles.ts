@@ -17,6 +17,7 @@ export const Title = styled.span`
 
 export const EventItem = styled.div`
     display: flex;
+    justify-content: center;
     flex-direction: column;
     gap: 2rem;
     border: 1px solid red;
@@ -31,4 +32,26 @@ export const Row = styled.div`
     flex-wrap: wrap;
     gap: 2rem;
     justify-content: space-between;
+    
 `
+export const TitleSection = styled.span`
+    text-align: left;
+    font-weight: bold ;
+    color: var(--color-blue-400);
+    font-size: 1rem;
+`
+
+export const FlexItem = styled.div`
+    flex-basis: 30%;
+    max-width: 30%;
+
+    @media (max-width: 768px) {
+        flex-basis: 40%;
+        max-width: 40%;
+    }
+
+    @media (max-width: 600px) {
+        flex-basis: 100%;
+        max-width: 100%;
+    }
+`;

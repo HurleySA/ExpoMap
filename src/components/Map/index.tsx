@@ -6,6 +6,8 @@ import { listEvents } from '../../mocks/event.ts'
 import { IEvent } from '../../commons/dto.ts';
 import { Button } from '../Button/index.tsx';
 import {  useNavigate } from 'react-router-dom';
+import { isBefore, parseISO } from 'date-fns';
+import { stateName } from '../../commons/utils.ts';
 
 const containerStyle = {
     width: '100%',
@@ -16,23 +18,6 @@ const center = {
     lat: -8.03,
     lng: -40.77,
   };
-
-interface IStateName {
-    [key:string]: string
-}
-
-const stateName : IStateName = {
-    "AL": 'Alagoas',
-    "BA": 'Bahia',
-    "PB": 'Paraiba',
-    "RN": 'Rio Grande do Norte',
-    "CE": 'Ceara',
-    "MA": 'Maranhão',
-    "PE": 'Pernambuco',
-    "PI": 'Piaui',
-    "SE": 'Sergipe',
-}
-
 
 const getListOfState = () => {
     const states: string[] = [];
@@ -81,6 +66,15 @@ export const Map = () => {
         id: 'google-map-script',
         googleMapsApiKey: "AIzaSyBjuKYUqPX-qUHkXeLVxQ5MMacCEAIl2QI"
       })
+    const verifyEventAlreadyFinish = (date: string) => {
+        const actualDate = new Date();
+        const eventDate = parseISO(date);
+        if (isBefore(eventDate, actualDate)) {
+            return true;
+          } else {
+            return false;
+          }
+    }
     return (
         <>
          {isLoaded ? (
@@ -90,6 +84,7 @@ export const Map = () => {
                 (modalOptionsEvent && eventToShow) &&
                 <ModalMarker>
                     <span onClick={() => setModalOptionsEvent(false)}>X</span>
+                    {verifyEventAlreadyFinish(eventToShow.endDate) && <p>EVENTO FINALIZADO</p> }
                     <p>{eventToShow.name}</p>
                     <Button theme='white' hasBorder><div onClick={() => navigate(`/programacao/${eventToShow.id}`)}>Programação</div></Button>
                     <Button theme='white' hasBorder><div onClick={() => navigate(`/detalhes/${eventToShow.id}`)}>Detalhes</div></Button>
@@ -118,7 +113,7 @@ export const Map = () => {
               zoom={5}
               >
                    {listEvents.map(event => (state.includes('ALL') || state.includes(event.address.state)) && 
-                    <Marker title='bom dia'  key={event.name} onClick={() => handleClickEvent(event)} 
+                    <Marker  key={event.name} onClick={() => handleClickEvent(event)} opacity={verifyEventAlreadyFinish(event.endDate) ? 0.6: 1}
                     position={{ lat: event.address.latitude , lng: event.address.longitude }}> 
                     </Marker>
                    )}

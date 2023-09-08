@@ -8,7 +8,7 @@ export const EventDetailsComplete = () => {
         <Container className="container">
             <Title>Lista de Eventos</Title>
             {listEvents.map(event => (
-                <EventDetailsCompleteItem event={event} />
+                <EventDetailsCompleteItem key={event.id} event={event} />
              ) )}
         </Container>
     )

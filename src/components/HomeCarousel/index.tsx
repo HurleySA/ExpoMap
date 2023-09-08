@@ -22,13 +22,13 @@ export const HomeCarousel: React.FC = () => {
             borderColor: '#fafafa',
             color: '#fafafa',
             backgroundColor: '#43A838'
-        }}, indicator: {backgroundColor: '#43A838' }}} 
+        }}, indicator: {backgroundColor: '#43A838' }}}  
         onSlideChange={(newIndex) => {
             (newIndex % 2  === 0 ) ? setFadeDirection('right') : setFadeDirection('left') ;
             setSlideName(getSlideNameByIndex(newIndex));
         }}
         >
-        {srcPatch.map(src => <Carousel.Slide><TestImage  onClick={(e) => {e.stopPropagation();
+        {srcPatch.map(src => <Carousel.Slide key={src}><TestImage  onClick={(e) => {e.stopPropagation();
         }} ><img src={src} /></TestImage></Carousel.Slide>)}
         </Carousel>
     </CarouselBack>

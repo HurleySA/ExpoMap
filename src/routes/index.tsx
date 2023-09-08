@@ -7,6 +7,7 @@ import { Schedule } from '../pages/Schedule'
 import { ScheduleByEvent } from '../pages/ScheduleByEvent'
 import { DetailsByEvent } from '../pages/DetailsByEvent'
 import { ParticipateEvent } from '../pages/Participate'
+import { LoginForm } from '../pages/Login'
 
 export const router = createBrowserRouter([
     {
@@ -43,5 +44,13 @@ export const router = createBrowserRouter([
                 element: <NotFound/>,
             }
         ]
-    } 
+    },
+    {
+        path:'/admin/login',
+        element: <LoginForm/>,
+    },
+    {
+        path:'/admin/solicitations',
+        element: <ParticipateEvent/>,
+    }
 ])
