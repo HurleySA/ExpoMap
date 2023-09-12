@@ -6,7 +6,6 @@ export const NotFound: React.FC = () => {
             <ContainerNotFound>
                 <h1>404</h1>
                 <h2>Página não encontrada.</h2>
-                <p>Aqui está onde pode procurar a vacina que perdeu:</p>
             </ContainerNotFound>
         </Container>
         

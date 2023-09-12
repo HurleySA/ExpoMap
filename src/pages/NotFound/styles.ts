@@ -10,7 +10,7 @@ export const ContainerNotFound = styled.div`
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    background-color: var(--color-orange-400);
+    background-color: var(--color-green-200);
     padding: 6rem 0;
     color: var(--color-white);
     border-radius: .5rem;

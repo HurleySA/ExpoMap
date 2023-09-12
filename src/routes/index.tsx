@@ -8,6 +8,9 @@ import { ScheduleByEvent } from '../pages/ScheduleByEvent'
 import { DetailsByEvent } from '../pages/DetailsByEvent'
 import { ParticipateEvent } from '../pages/Participate'
 import { LoginForm } from '../pages/Login'
+import { SolicitationsPage } from '../pages/Solicitations'
+import { FormAdministrator } from '../components/FormAdministrator'
+import { CompleteSolicitation } from '../pages/CompleteSolicitation'
 
 export const router = createBrowserRouter([
     {
@@ -40,6 +43,10 @@ export const router = createBrowserRouter([
                 element: <ParticipateEvent/>,
             },
             {
+                path:'/complete/solicitation/:id',
+                element: <CompleteSolicitation/>,
+            },
+            {
                 path:'*',
                 element: <NotFound/>,
             }
@@ -51,6 +58,6 @@ export const router = createBrowserRouter([
     },
     {
         path:'/admin/solicitations',
-        element: <ParticipateEvent/>,
+        element: <SolicitationsPage/>,
     }
 ])

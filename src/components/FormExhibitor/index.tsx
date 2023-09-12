@@ -2,7 +2,6 @@ import { TextInput, Textarea, SimpleGrid, Group, Title, Button, Select } from '@
 import { useForm } from '@mantine/form';
 import { getInitialValueExhibitor } from './utils';
 import { listEvents } from '../../mocks/event';
-import { useCallback } from 'react';
 
 interface IParticipateEventProps {
   eventId?: string,

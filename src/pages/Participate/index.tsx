@@ -3,6 +3,7 @@ import {  Container, ContainerChoices, ItemOption, SubTitleSelect, ContaineForm,
 import { FormAdministrator } from '../../components/FormAdministrator'
 import { FormExhibitor } from '../../components/FormExhibitor'
 import { useLocation } from 'react-router-dom'
+import { FormSolicitation } from '../../components/FormSolicitation'
 
 export const ParticipateEvent: React.FC = () => {
     const [typeForm, setTypeForm] = useState<'exhibitor' | 'administrator'>('exhibitor')    
@@ -20,7 +21,7 @@ export const ParticipateEvent: React.FC = () => {
                 <ItemOption isActive={typeForm === 'administrator'} onClick={toggleTypeForm} >Administrador</ItemOption>
             </ContainerChoices>
             <ContaineForm>
-                {typeForm === 'exhibitor' ? <FormExhibitor eventId={eventId}/>   : <FormAdministrator />  }
+                {typeForm === 'exhibitor' ? <FormExhibitor eventId={eventId}/>   : <FormSolicitation />  }
             </ContaineForm>
         </Container>
         

@@ -28,7 +28,14 @@ export interface ParticipateOptionProps {
     isActive: boolean;
 }
 
-
+export interface IEventSolicitation {
+    id: string
+    eventName: string,
+    typeEntrance: 'free' | 'paid' | 'hybrid',
+    emailAdmin: string,
+    phoneAdmin: string,
+    detailsEvent: string
+}
 export interface IEvent {
     id: string
     name: string,
