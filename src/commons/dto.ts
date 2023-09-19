@@ -6,6 +6,10 @@ export interface IAccordionProps {
     listFAQ: IFrequencyQuestion[]
 }
 
+export interface IMapProps {
+    events: IEvent[]
+}
+
 export interface IButtonProps {
     children: ReactNode;
     theme: "green" | "white";

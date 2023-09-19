@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import {  Container, ContainerChoices, ItemOption, SubTitleSelect, ContaineForm, Title } from "./styles"
-import { FormAdministrator } from '../../components/FormAdministrator'
 import { FormExhibitor } from '../../components/FormExhibitor'
 import { useLocation } from 'react-router-dom'
 import { FormSolicitation } from '../../components/FormSolicitation'

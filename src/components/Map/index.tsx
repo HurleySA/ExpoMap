@@ -1,9 +1,8 @@
 import { useState } from 'react';
-import { FilterContainer, FilterContentContainer, FilterItem, FilterMapContainer, FilterOptionsContainer, MapContainer, ModalMarker } from './styles';
+import { FilterContainer, FilterContentContainer,  FilterMapContainer, FilterOptionsContainer, MapContainer, ModalMarker } from './styles';
 import { Checkbox, Loader } from "@mantine/core"
 import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api';
-import { listEvents } from '../../mocks/event.ts'
-import { IEvent } from '../../commons/dto.ts';
+import { IEvent, IMapProps } from '../../commons/dto.ts';
 import { Button } from '../Button/index.tsx';
 import {  useNavigate } from 'react-router-dom';
 import { isBefore, parseISO } from 'date-fns';
@@ -19,23 +18,25 @@ const center = {
     lng: -40.77,
   };
 
-const getListOfState = () => {
-    const states: string[] = [];
 
-    for (const event of listEvents) {
-        if (event.address.state && !states.includes(event.address.state)) {
-            states.push(event.address.state);
-        }
-    }
-    return states;
-}
-const listOfStates = getListOfState()
 
-export const Map = () => {
+export const Map = ({ events }: IMapProps) => {
     const [state, setStates] = useState<string[]>([]);
     const [showFilterOptions, setShowFilterOptions] = useState<boolean>(true);
     const [modalOptionsEvent, setModalOptionsEvent] = useState<boolean>(false);
     const [eventToShow, setEventToShow] = useState<IEvent | null>(null);
+
+    const getListOfState = (events: IEvent[]) => {
+        const states: string[] = [];
+    
+        for (const event of events) {
+            if (event.address.state && !states.includes(event.address.state)) {
+                states.push(event.address.state);
+            }
+        }
+        return states;
+    }
+    const listOfStates = getListOfState(events);
 
     const navigate = useNavigate()
     const toggleFilterOptions = () => {
@@ -112,7 +113,7 @@ export const Map = () => {
               center={center} 
               zoom={5}
               >
-                   {listEvents.map(event => (state.includes('ALL') || state.includes(event.address.state)) && 
+                   {events.map(event => (state.includes('ALL') || state.includes(event.address.state)) && 
                     <Marker  key={event.name} onClick={() => handleClickEvent(event)} opacity={verifyEventAlreadyFinish(event.endDate) ? 0.6: 1}
                     position={{ lat: event.address.latitude , lng: event.address.longitude }}> 
                     </Marker>

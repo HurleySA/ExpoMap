@@ -1,15 +1,54 @@
-import { TextInput, Textarea, SimpleGrid, Group, Title, Button, Select } from '@mantine/core';
+import { TextInput, SimpleGrid, Group, Title, Button, Select } from '@mantine/core';
 import { useForm } from '@mantine/form';
-import { getInitialValueAdministrator, getInitialValueAdministratorSolicitation } from './utils';
+import { getInitialValueAdministrator } from './utils';
+import { useParams } from 'react-router-dom';
+import { api } from '../../services/api';
 
 export const FormAdministrator: React.FC = () => {
+  const { id }= useParams();
   const initialValues = getInitialValueAdministrator();
   const form = useForm({
     initialValues
   });
 
+  const handleSubmit = async (values, solicitationId) => {
+    try {
+      console.log(values.event)
+      const submitObject = {
+        name: values.event.name,
+        city: values.event.address.city,
+        state: values.event.address.state,
+        street: values.event.address.city,
+        neighborhood: values.event.address.neighborhood,
+        number: values.event.address.number,
+        latitude: parseFloat(values.event.address.latitude),
+        longitude: parseFloat(values.event.address.longitude),
+        startDate: values.event.startDate,
+        startDate: values.event.startDate,
+        endDate: values.event.endDate,
+        openningHour: values.event.openningHour,
+        closeHour: values.event.closeHour,
+        solicitationId,
+        typeEntrance: values.event.typeEntrance,
+        valueEntrance: values.event.valueEntrance,
+        startPaymentEntranceHour: values.event.startPaymentEntranceHour || values.event.openningHour,  //PERMITIR SER EMPTY
+        emailAdmin: values.event.emailAdmin,
+        phoneAdmin: values.event.phoneAdmin,
+        sponsors: [], //RESOLVER
+        hasLounge: values.event.hasLounge,
+        loungeBuyLink: values.event.loungeBuyLink,
+        schedules: []
+      }
+      const event = await api.post('/event', submitObject);
+      console.log('solicitação criada:', event.data.id);
+      form.reset();
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
   return (
-    <form onSubmit={form.onSubmit(() => console.log(form.values))}>
+    <form onSubmit={form.onSubmit(() => handleSubmit(form.values, id))}>
       <Title
         order={2}
         size="h1"

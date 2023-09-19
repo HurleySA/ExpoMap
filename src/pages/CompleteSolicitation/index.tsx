@@ -22,7 +22,6 @@ export const CompleteSolicitation: React.FC = () => {
         } catch (err) {
             return null;
         }
-       
     } 
     useEffect(()=> {
 

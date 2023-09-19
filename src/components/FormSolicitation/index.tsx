@@ -1,6 +1,7 @@
 import { TextInput, Textarea, SimpleGrid, Group, Title, Button, Select } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { getInitialValueAdministratorSolicitation } from './utils';
+import { api } from '../../services/api';
 
 
 export const FormSolicitation: React.FC = () => {
@@ -9,8 +10,18 @@ export const FormSolicitation: React.FC = () => {
     initialValues
   });
 
+  const handleSubmit = async (values: any) => {
+    try {
+      const solicitation = await api.post('/solicitation', values);
+      console.log('solicitação criada:', solicitation.data.id);
+      form.reset();
+    } catch (err){
+      console.log('ocorreu um error:', err);
+    }
+  }
+
   return (
-    <form onSubmit={form.onSubmit(() => console.log(form.values))}>
+    <form onSubmit={form.onSubmit( async () => await handleSubmit(form.values)) }>
       <Title
         order={2}
         size="h1"
