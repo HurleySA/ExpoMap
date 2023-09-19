@@ -31,10 +31,11 @@ export interface ParticipateOptionProps {
 export interface IEventSolicitation {
     id: string
     eventName: string,
-    typeEntrance: 'free' | 'paid' | 'hybrid',
+    typeEntrance: 'FREE' | 'PAID' | 'HYBRID',
     emailAdmin: string,
     phoneAdmin: string,
-    detailsEvent: string
+    detailsEvent: string,
+    status: 'PENDING' | 'ACCEPTED' | 'REJECTED'
 }
 export interface IEvent {
     id: string
@@ -44,7 +45,7 @@ export interface IEvent {
     endDate: string,
     openningHour: string,
     closeHour: string,
-    typeEntrance: 'free' | 'paid' | 'hybrid'
+    typeEntrance: 'FREE' | 'PAID' | 'HYBRID'
     valueEntrance?: number,
     startPaymentEntranceHour?: string,
     emailAdmin: string,
