@@ -42,8 +42,15 @@ export const CompleteSolicitation: React.FC = () => {
     },[id, navigate]);
     return(
         <Container className="container">
-             <Title>{solicitation?.eventName}</Title>
-             <FormAdministrator/>
+            {
+                loading ? <Title>CARREGANDO</Title> : (
+                    <>
+                        <Title>{solicitation?.eventName}</Title>
+                        <FormAdministrator/>
+                    </>
+                )
+            }
+            
         </Container>    
     )
 }

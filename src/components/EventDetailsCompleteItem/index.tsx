@@ -17,7 +17,7 @@ export const EventDetailsCompleteItem: React.FC<IEventDetailsCompleteProps>  = (
         return completedAddress;
     }
 
-    const getIsPaidString = (typeEntrance: string) => typeEntrance === 'free' ? 'Não' : 'Sim' ;
+    const getIsPaidString = (typeEntrance: string) => typeEntrance === 'FREE' ? 'Não' : 'Sim' ;
     const getHasLounge = (hasLounge: boolean) => hasLounge ? 'Sim' : 'Não' ;
     return (
     <EventItem key={event.name}>

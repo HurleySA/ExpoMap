@@ -8,7 +8,7 @@ import { format, parseISO } from "date-fns";
 
 export const EventDetails = () => {
 
-    const getIsPaidString = (typeEntrance: string) => typeEntrance === 'free' ? 'Não' : 'Sim' ;
+    const getIsPaidString = (typeEntrance: string) => typeEntrance === 'FREE' ? 'Não' : 'Sim' ;
     const navigate = useNavigate()
     const firstTwoEvents = listEvents.slice(0, 3);
     return (

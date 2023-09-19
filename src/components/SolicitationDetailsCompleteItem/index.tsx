@@ -10,9 +10,9 @@ export interface ISolicitationDetailsCompleteProps {
 }
 
 const eventTypeText =  { 
-    free: 'Grátis',
-    hybrid: 'Pago parcialmente',
-    paid: 'Pago'
+    FREE: 'Grátis',
+    HYBRID: 'Pago parcialmente',
+    PAID: 'Pago'
 }
 
 const handleAccept = () => {

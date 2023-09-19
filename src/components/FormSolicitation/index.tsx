@@ -48,9 +48,9 @@ export const FormSolicitation: React.FC = () => {
         <Select 
             label="Qual o tipo do evento?"
             data={[
-                {value: 'free', label: 'Grátis'},
-                {value: 'hybrid', label: 'Pago parcialmente'},
-                {value: 'paid', label: 'Pago'},
+                {value: 'FREE', label: 'Grátis'},
+                {value: 'HYBRID', label: 'Pago parcialmente'},
+                {value: 'PAID', label: 'Pago'},
             ]}
             mt="md"
             name="typeEntrance"

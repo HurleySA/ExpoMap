@@ -151,18 +151,18 @@ export const FormAdministrator: React.FC = () => {
         <Select 
             label="Qual o tipo do evento?"
             data={[
-                {value: 'free', label: 'Grátis'},
-                {value: 'hybrid', label: 'Pago parcialmente'},
-                {value: 'paid', label: 'Pago'},
+                {value: 'FREE', label: 'Grátis'},
+                {value: 'HYBRID', label: 'Pago parcialmente'},
+                {value: 'PAID', label: 'Pago'},
             ]}
             mt="md"
             name="event.typeEntrance"
             variant="filled"
             {...form.getInputProps('event.typeEntrance')}
         />
-        { form.values.event.typeEntrance !== "free" && (
+        { form.values.event.typeEntrance !== "FREE" && (
           <>
-          { form.values.event.typeEntrance !== "paid" && (
+          { form.values.event.typeEntrance !== "PAID" && (
             <>
               <TextInput
                 label="Horário de inicio da cobrança"
@@ -196,7 +196,7 @@ export const FormAdministrator: React.FC = () => {
             variant="filled"
             {...form.getInputProps('event.hasLounge')}
         />
-          { form.values.event.typeEntrance !== "paid" && (<>
+          { form.values.event.typeEntrance !== "PAID" && (<>
             <TextInput
               label="Link para compra do camarote"
               placeholder="Link para compra do camarote"

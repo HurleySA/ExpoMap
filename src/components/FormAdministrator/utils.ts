@@ -24,7 +24,7 @@ export const getInitialValueAdministrator = () => {
             endDate: '',
             openningHour: '',
             closeHour: '',
-            typeEntrance: 'free',
+            typeEntrance: 'FREE',
             startPaymentEntranceHour: '',
             valueEntrance: 0,
             emailAdmin: '',
