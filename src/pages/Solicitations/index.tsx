@@ -26,7 +26,7 @@ export const SolicitationsPage: React.FC = () => {
         const loadEventSolicitations = async () => {
             setLoading(true);
             const events = await getEventSolicitations();
-            setEventSolicitations(events);
+            setEventSolicitations(events.reverse());
             setLoading(false);
         }
 

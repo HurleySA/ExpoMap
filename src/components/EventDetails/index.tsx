@@ -37,7 +37,9 @@ export const EventDetails = () => {
 
     const getIsPaidString = (typeEntrance: string) => typeEntrance === 'FREE' ? 'Não' : 'Sim' ;
     const navigate = useNavigate()
-    const firstTwoEvents = events.slice(0, 3);
+    const firstTwoEvents = events.slice(0, 2);
+
+    console.log('f',firstTwoEvents)
     return (
         <Container className="container">
             {

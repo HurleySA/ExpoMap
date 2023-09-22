@@ -52,8 +52,8 @@ export const EventDetailsCompleteItem: React.FC<IEventDetailsCompleteProps>  = (
                     <FlexItem><Information label="Horário de Abertura" value={event.openningHour} /></FlexItem>
                     <FlexItem><Information label="Horário de Fechamento" value={event.closeHour} /></FlexItem>
                     <FlexItem><Information label="Evento pago" value={getIsPaidString(event.typeEntrance)} /></FlexItem>
-                    { event.startPaymentEntranceHour && <FlexItem><Information label="Hórario de inicio da entrada paga" value={event.startPaymentEntranceHour} /></FlexItem>}
-                    { event.valueEntrance && <FlexItem><Information label="Valor da entrada" value={`${event.valueEntrance.toString()} reais`} /></FlexItem>}
+                    { event.typeEntrance !== 'FREE' && event.startPaymentEntranceHour && <FlexItem><Information label="Hórario de inicio da entrada paga" value={event.startPaymentEntranceHour} /></FlexItem>}
+                    { event.typeEntrance !== 'FREE' && event.valueEntrance && <FlexItem><Information label="Valor da entrada" value={`${event.valueEntrance.toString()} reais`} /></FlexItem>}
                 </Row>
             </Section>
             <Section>
@@ -64,7 +64,7 @@ export const EventDetailsCompleteItem: React.FC<IEventDetailsCompleteProps>  = (
                     <FlexItem><Information label="Endereço" value={getAddressString(event.address)} /></FlexItem>
                 </Row>
             </Section>
-            { event.valueEntrance && 
+            { event.typeEntrance !== 'FREE' && event.valueEntrance && 
             <Section>
                 <TitleSection>Informações Camarote</TitleSection>
                 <Row>

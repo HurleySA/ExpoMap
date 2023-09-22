@@ -72,3 +72,31 @@ export const ArrowIcon = styled.span`
         cursor: pointer;
     }
 `
+
+
+export const FilterOptionsContainer = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background: rgba(0,0,0,0.1);
+`
+
+export const ConfirmAction = styled.div`
+    display: flex;
+    padding: 1rem;
+    flex-direction: column;
+    gap: 1rem;
+    border-radius: 10px;
+    background-color: var(--color-white);
+`
+
+export const ContainerButtons = styled.div`
+    display: flex;
+    justify-content: space-around;
+`

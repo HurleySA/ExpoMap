@@ -2,12 +2,40 @@ import { TextInput, Textarea, SimpleGrid, Group, Title, Button, Select } from '@
 import { useForm } from '@mantine/form';
 import { getInitialValueExhibitor } from './utils';
 import { listEvents } from '../../mocks/event';
+import { IEvent } from '../../commons/dto';
+import { useEffect, useState } from 'react';
+import { api } from '../../services/api';
 
 interface IParticipateEventProps {
   eventId?: string,
 }
 
 export const FormExhibitor: React.FC<IParticipateEventProps> = ({eventId}) => {
+  const [events, setEvents] = useState<IEvent[]>([]);
+  const [loading, setLoading] = useState<boolean>(false)
+
+
+  const getEvents = async (): Promise<IEvent[]> => {
+      try {
+          const data = await api.get(`/event`);
+          const json = data.data;
+          return json;
+      } catch (err) {
+          return [];
+      }
+  } 
+
+  useEffect(() => {
+      const loadEvents = async () => {
+          setLoading(true);
+          const events = await getEvents();
+          setEvents(events);
+          setLoading(false);
+      }
+
+      loadEvents();
+      
+  }, [])
   const initialValues = getInitialValueExhibitor(eventId);
   const form = useForm({
     initialValues,
@@ -20,7 +48,7 @@ export const FormExhibitor: React.FC<IParticipateEventProps> = ({eventId}) => {
     },
   });
 
-  const eventsListToSelect = listEvents.map((event) => ({value: event.id, label: event.name}))
+  const eventsListToSelect = events.map((event) => ({value: event.id, label: event.name}))
   return (
     <form onSubmit={form.onSubmit(() => console.log(form.values))}>
       <Title

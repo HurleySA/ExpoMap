@@ -8,8 +8,9 @@ import { api } from "../../services/api"
 
 export const Schedule: React.FC = () => {
     const [events, setEvents] = useState<IEvent[]>([]);
-    const [loading, setLoading] = useState<boolean>(false)
-
+    const [loading, setLoading] = useState<boolean>(false);
+    const [states, setStates] = useState<string[]>(['ALL']);
+    const [filteredEvents, setFilteredEvents] = useState<IEvent[]>([]);
 
     const getEvents = async (): Promise<IEvent[]> => {
         try {
@@ -29,20 +30,32 @@ export const Schedule: React.FC = () => {
             setLoading(false);
         }
 
-        loadEvents();
-        
+        loadEvents(); 
     }, [])
+
+    useEffect(() => {
+        const filterEvents = () => {
+            if(states.includes('ALL')){
+                setFilteredEvents(events);
+            } else {
+                const filteredEvents = events.filter((event) => states.includes(event.address.state))
+                setFilteredEvents(filteredEvents);
+            } 
+        }
+
+        filterEvents(); 
+    }, [states, events])
     const [mapView, setMapView] = useState(false);
     return(
         <Container >
             {
                 loading ? <h1>CARREGANDO</h1> : (
                     <>
-                        <Filter mapView={mapView} setMapView={setMapView} />
+                        <Filter mapView={mapView} setMapView={setMapView} events={events} states={states} setStates={setStates}/>
                         {
                         mapView ? 
                         <Map events={events}/> :
-                        <EventDetailsComplete events={events}/>
+                        <EventDetailsComplete events={filteredEvents}/>
                         }
                     </>
                 )

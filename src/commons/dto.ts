@@ -19,7 +19,10 @@ export interface IButtonProps {
 }
 export interface IFilterProps {
     mapView: boolean,
-    setMapView: React.Dispatch<React.SetStateAction<boolean>>
+    setMapView: React.Dispatch<React.SetStateAction<boolean>>,
+    events: IEvent[],
+    states: string[],
+    setStates: React.Dispatch<React.SetStateAction<string[]>>,
 }
 
 export interface ButtonThemeProps {

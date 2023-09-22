@@ -4,7 +4,7 @@ export const Container = styled.section`
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 2rem 0;
+    padding: 1rem 0;
 `
 
 export const Title = styled.span`
@@ -19,11 +19,11 @@ export const EventItem = styled.div`
     display: flex;
     justify-content: center;
     flex-direction: column;
-    gap: 2rem;
+    gap: 1rem;
     border: 1px solid red;
     width: 100%;
     border-color: var(--color-green-400);
-    padding: 2rem;
+    padding: 1rem;
     border-radius: 1rem;
     margin-bottom: 1rem;
 `
