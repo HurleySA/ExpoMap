@@ -14,7 +14,8 @@ export const ShowList: React.FC<IEventDetailsCompleteProps>  = ({event}) =>  {
 
     getDateString('2023-07-01')
 
-    
+    console.log(event.schedules)
+
     return (
         <ContainerShowList>
             {event.schedules.length > 0 ? 

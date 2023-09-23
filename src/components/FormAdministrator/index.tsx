@@ -1,52 +1,108 @@
-import { TextInput, SimpleGrid, Group, Title, Button, Select } from '@mantine/core';
+import { TextInput, SimpleGrid, Group, Title, Button, Select, ActionIcon } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { getInitialValueAdministrator } from './utils';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { api } from '../../services/api';
+import { IEventSolicitation, ISchedule, IShow } from '../../commons/dto';
+import { toast } from 'react-toastify';
+import { DatePickerInput, TimeInput } from '@mantine/dates';
+import { IconClock } from '@tabler/icons-react';
+import React, { useRef, useState } from 'react';
+import { format, parseISO } from 'date-fns';
+import { ContainerShow, ContainerShowList, ShowDetailsContainer, TitleShowDate } from './styles';
+import locale from 'date-fns/locale/pt-BR'
 
-export const FormAdministrator: React.FC = () => {
+
+interface IFormAdministratorProps {
+  solicitation: IEventSolicitation | undefined
+}
+
+export const FormAdministrator: React.FC<IFormAdministratorProps> = ({solicitation} ) => {
   const { id }= useParams();
-  const initialValues = getInitialValueAdministrator();
+  const navigate = useNavigate();
+  const [schedules, setSchedules] = useState<ISchedule[]>([]);
+  const [openFormSchedule, setOpenFormSchedule] = useState<boolean>(false);
+  const [showNumber, setShowNumber] = useState<IShow[]>([{band: '', hour: ''}]);
+  const [value, setValue] = useState<Date | null>(null);
+  const ref = useRef<HTMLInputElement>();
+  const refClose = useRef<HTMLInputElement>();
+  const refPayment = useRef<HTMLInputElement>();
+  const initialValues = getInitialValueAdministrator(solicitation);
   const form = useForm({
     initialValues
   });
 
-  const handleSubmit = async (values, solicitationId) => {
+  const addSchedule = (newSchedule) => {
+    const updatedSchedules = [...schedules];
+    updatedSchedules.push(newSchedule);
+    setSchedules(updatedSchedules);
+  };
+
+  const resetNewScheduleForm = () => {
+    setValue(null);
+    setShowNumber([{band: '', hour: ''}])
+  }
+
+  const getDateString = (dateString: string) => {
+    const date = parseISO(dateString);
+    const formattedDate = format(date, "'Dia' do MMMM 'de' yyyy (EEEE)", { locale})
+    return formattedDate;
+}
+
+const handleHourChange = (value: React.ChangeEvent<HTMLInputElement>, index: number) => {
+  const updatedShowNumber = [...showNumber];
+  updatedShowNumber[index].hour = value.target.value;
+  setShowNumber(updatedShowNumber);
+};
+const handleBandChange = (event: any, index: number) => {
+  const updatedShowNumber = [...showNumber];
+  updatedShowNumber[index].band = event.target.value;
+  setShowNumber(updatedShowNumber);
+};
+
+const validateShows = (shows: IShow[]) =>  shows.every(item => item.band !== '');
+
+
+
+  const handleSubmit = async (values, solicitationId, schedules) => {
     try {
       const submitObject = {
         name: values.event.name,
         city: values.event.address.city,
         state: values.event.address.state,
-        street: values.event.address.city,
+        street: values.event.address.street,
         neighborhood: values.event.address.neighborhood,
-        number: values.event.address.number,
+        number: values.event.address.number === 'S/N' ? 'S/N' : parseInt(values.event.address.number),
         latitude: parseFloat(values.event.address.latitude),
         longitude: parseFloat(values.event.address.longitude),
-        startDate: values.event.startDate,
-        startDate: values.event.startDate,
-        endDate: values.event.endDate,
+        startDate: format(values.event.startDate, 'yyyy-MM-dd'),
+        endDate: format(values.event.endDate, 'yyyy-MM-dd'),
         openningHour: values.event.openningHour,
         closeHour: values.event.closeHour,
         solicitationId,
         typeEntrance: values.event.typeEntrance,
-        valueEntrance: values.event.valueEntrance,
+        valueEntrance: parseInt(values.event.valueEntrance),
         startPaymentEntranceHour: values.event.startPaymentEntranceHour || values.event.openningHour,  //PERMITIR SER EMPTY
         emailAdmin: values.event.emailAdmin,
         phoneAdmin: values.event.phoneAdmin,
         sponsors: [], //RESOLVER
         hasLounge: values.event.hasLounge,
         loungeBuyLink: values.event.loungeBuyLink,
-        schedules: []
+        schedules
       }
-      const event = await api.post('/event', submitObject);
+      console.log(submitObject)
+      await api.post('/event', submitObject);
+      toast.success("Evento registrado enviada com sucesso!");
+      navigate('/')
       form.reset();
     } catch (err) {
+      toast.error("Erro ao registrar evento!")
       console.log(err)
     }
-  }
+  } 
 
   return (
-    <form onSubmit={form.onSubmit(() => handleSubmit(form.values, id))}>
+    <form onSubmit={form.onSubmit(() => handleSubmit(form.values, id, schedules))}>
       <Title
         order={2}
         size="h1"
@@ -149,38 +205,46 @@ export const FormAdministrator: React.FC = () => {
       </SimpleGrid>
 
       <SimpleGrid cols={2} mt="xl" breakpoints={[{ maxWidth: 'sm', cols: 1 }]}>
-        <TextInput
-          label="Data da abertura"
-          placeholder="Date da abertura"
-          name="event.startDate"
-          variant="filled"
-          {...form.getInputProps('event.startDate')}
-        />
-
-        <TextInput
-          label="Data de encerramento"
-          placeholder="Data de encerramento"
-          name="event.endDate"
-          variant="filled"
-          {...form.getInputProps('event.endDate')}
-        />
+      <DatePickerInput
+        label="Data da abertura"
+        placeholder="Data da abertura"
+        minDate={new Date()}
+        defaultDate={new Date()}
+        name="event.startDate"
+        {...form.getInputProps('event.startDate')}
+      />
+      <DatePickerInput
+        label="Data de encerramento"
+        placeholder="Data de encerramento"
+        minDate={new Date()}
+        defaultDate={new Date()}
+        name="event.endDate"
+        {...form.getInputProps('event.endDate')}
+      />
       </SimpleGrid>
       <SimpleGrid cols={2} mt="xl" breakpoints={[{ maxWidth: 'sm', cols: 1 }]}>
-        <TextInput
-          label="Horário de abertura"
-          placeholder="Horário de abertura"
-          name="event.openningHour"
-          variant="filled"
-          {...form.getInputProps('event.openningHour')}
-        />
-
-        <TextInput
-          label="Horário de fechamento"
-          placeholder="Horário de fechamento"
-          name="event.closeHour"
-          variant="filled"
-          {...form.getInputProps('event.closeHour')}
-        />
+        <TimeInput
+            label="Horário de abertura"
+            ref={ref}
+            rightSection={
+              <ActionIcon onClick={() => ref.current.showPicker()}>
+                <IconClock size="1rem" stroke={1.5} />
+              </ActionIcon>
+            }
+            name="event.openningHour"
+            {...form.getInputProps('event.openningHour')}
+          />
+        <TimeInput
+            label="Horário de fechamento"
+            ref={refClose}
+            rightSection={
+              <ActionIcon onClick={() => refClose.current.showPicker()}>
+                <IconClock size="1rem" stroke={1.5} />
+              </ActionIcon>
+            }
+            name="event.closeHour"
+            {...form.getInputProps('event.closeHour')}
+          />
       </SimpleGrid>
 
       
@@ -192,7 +256,6 @@ export const FormAdministrator: React.FC = () => {
                 {value: 'HYBRID', label: 'Pago parcialmente'},
                 {value: 'PAID', label: 'Pago'},
             ]}
-            mt="md"
             name="event.typeEntrance"
             variant="filled"
             {...form.getInputProps('event.typeEntrance')}
@@ -201,13 +264,17 @@ export const FormAdministrator: React.FC = () => {
           <>
           { form.values.event.typeEntrance !== "PAID" && (
             <>
-              <TextInput
-                label="Horário de inicio da cobrança"
-                placeholder="Horário inicio da cobrança"
-                name="event.startPaymentEntranceHour"
-                variant="filled"
-                {...form.getInputProps('event.startPaymentEntranceHour')}
-              />
+                <TimeInput
+                  label="Horário de inicio da cobrança"
+                  ref={refPayment}
+                  rightSection={
+                    <ActionIcon onClick={() => refPayment.current.showPicker()}>
+                      <IconClock size="1rem" stroke={1.5} />
+                    </ActionIcon>
+                  }
+                  name="event.startPaymentEntranceHour"
+                  {...form.getInputProps('event.startPaymentEntranceHour')}
+                />
             </>
           )}
           <TextInput
@@ -233,7 +300,7 @@ export const FormAdministrator: React.FC = () => {
             variant="filled"
             {...form.getInputProps('event.hasLounge')}
         />
-          { form.values.event.typeEntrance !== "PAID" && (<>
+          { form.values.event.hasLounge && (<>
             <TextInput
               label="Link para compra do camarote"
               placeholder="Link para compra do camarote"
@@ -243,6 +310,99 @@ export const FormAdministrator: React.FC = () => {
             />
           </>)}
       </SimpleGrid>
+      <Group position="left" mt="xl">
+        <Title order={3}>Programação:</Title>
+        <ContainerShowList>
+            {schedules.length > 0 ? 
+            <>
+                {schedules.map(schedule => (
+                    <ContainerShow key={schedule.date}>
+                        <TitleShowDate>{getDateString(schedule.date)}</TitleShowDate>
+                        {schedule.shows.map(show => (
+                            <ShowDetailsContainer key={show.band}>
+                                <p>{show.band}</p>
+                                {show.hour ? <p>{show.hour} horas.</p> : <p>-</p>}
+                            </ShowDetailsContainer>
+                        ))
+                        }
+                    </ContainerShow>
+                )
+                        
+                )}
+            </>
+            : <p>Não há shows cadastrados</p>
+        }
+
+        </ContainerShowList>
+      </Group>
+
+          <Group position="left" mt="xl">
+            <Button  size="md" color='gray' onClick={() => setOpenFormSchedule(true)}>
+              Editar programação
+            </Button>
+          </Group>
+
+
+          {
+            openFormSchedule && (
+              <>
+                <SimpleGrid cols={2} mt="xl" breakpoints={[{ maxWidth: 'sm', cols: 1 }]}>
+                  <DatePickerInput
+                    label="Data das apresentações"
+                    placeholder="Data das apresentações"
+                    minDate={new Date(form.values.event.startDate)}
+                    maxDate={new Date(form.values.event.endDate)}
+                    defaultDate={new Date(form.values.event.startDate)}
+                    value={value}
+                    onChange={setValue}
+                  />
+            
+                </SimpleGrid>
+                {
+                  showNumber.map((show, index) => {
+                    return (
+                      <SimpleGrid key={index} cols={2} mt="xl" breakpoints={[{ maxWidth: 'sm', cols: 1 }]}>
+                        <TextInput
+                          label="Nome da atração"
+                          placeholder="Nome da atração"
+                          value={showNumber[index].band}
+                          onChange={(event) => handleBandChange(event, index)}
+                        />
+                        <TimeInput
+                            label="Horário da atração"
+                            placeholder="Horário da atração"
+                            value={showNumber[index].hour}
+                            onChange={(value) => handleHourChange(value, index)}
+                          />
+                      </SimpleGrid>
+                    )
+                  })
+                }
+    
+          
+                <Group position="left" mt="xl">
+                  <Button size="md" color='green' onClick={() => {  
+                    setShowNumber([...showNumber, {band: '', hour: ''}])
+                  }}>
+                    Adicionar novo show
+                  </Button>
+                { (value && validateShows(showNumber)) &&
+                  <Button size="md" color='green' onClick={() => {
+                    addSchedule({date: format(value, 'yyyy-MM-dd'), shows:showNumber});
+                    resetNewScheduleForm()
+                    setOpenFormSchedule(false)
+                  }}>
+                    Editar programação
+                </Button>
+                }
+                </Group>
+              </>
+            ) 
+          }
+   
+    
+
+     
 
       <Group position="center" mt="xl">
         <Button type="submit" size="md" color='green'>

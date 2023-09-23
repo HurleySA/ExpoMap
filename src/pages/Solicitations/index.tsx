@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react'
-import { listSolicitations } from "../../mocks/solicitation"
 import {  Container,Title } from "./styles"
 import { SolicitationDetailsCompleteItem } from "../../components/SolicitationDetailsCompleteItem"
 import { IEventSolicitation } from '../../commons/dto'
 import { api } from '../../services/api'
+import { useNavigate } from 'react-router-dom'
 
 
 
@@ -11,10 +11,15 @@ import { api } from '../../services/api'
 export const SolicitationsPage: React.FC = () => {
     const [eventSolicitations, setEventSolicitations] = useState<IEventSolicitation[]>([]);
     const [loading, setLoading] = useState<boolean>(false)
-
+    const storageToken = window.localStorage.getItem('token');
+    const navigate = useNavigate() 
     const getEventSolicitations = async (): Promise<IEventSolicitation[]> => {
         try {
-            const data = await api.get(`/solicitation`);
+            const data = await api.get(`/solicitation`, {
+                headers: {
+                    Authorization: `Bearer ${storageToken ?? ``}`, 
+                }
+            });
             const json = data.data;
             return json;
         } catch (err) {
@@ -30,7 +35,9 @@ export const SolicitationsPage: React.FC = () => {
             setLoading(false);
         }
 
-        loadEventSolicitations();
+        const storageToken = window.localStorage.getItem('token');
+
+        storageToken ? loadEventSolicitations() : navigate("/admin/login")
         
     }, [])
     return(
@@ -41,7 +48,7 @@ export const SolicitationsPage: React.FC = () => {
                         <Title>SOLICITAÇÕES EM ABERTO</Title>
                         { eventSolicitations.map(solicitation => {
                             return (
-                            <SolicitationDetailsCompleteItem eventSolicitation={solicitation} />
+                            <SolicitationDetailsCompleteItem key={solicitation.id} eventSolicitation={solicitation} />
                         )})}
                     </>
                 )

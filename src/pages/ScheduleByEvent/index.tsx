@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useParams } from "react-router-dom"
 import {  Container, Title } from "./styles"
-import { listEvents } from '../../mocks/event.ts'
 import { ShowList } from "../../components/ShowList/index.tsx"
 import { IEvent } from '../../commons/dto.ts'
 import { api } from '../../services/api.ts'
@@ -33,7 +32,7 @@ export const ScheduleByEvent: React.FC = () => {
         }
 
         loadEvent();
-    },[getEvent])
+    },[])
         
     return(
         <Container className="container">

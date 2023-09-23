@@ -1,34 +1,34 @@
-import { IEvent } from "../../commons/dto"
-type IEventDescription = Omit<IEvent, 'id' | 'sponsors' | 'schedules'> & { sponsors: string, schedules: string }
+import { IEvent, IEventSolicitation } from "../../commons/dto"
+type IEventDescription = Omit<IEvent, 'id' | 'sponsors' | 'schedules' |'startDate' | 'endDate'> & { sponsors: string, schedules: string, startDate: Date, endDate: Date }
 
 interface IObjectInitialAdministrator {
     nameAdmin: string,
     event: IEventDescription
 }
 
-export const getInitialValueAdministrator = () => {
+export const getInitialValueAdministrator = (solicitation: IEventSolicitation) => {
     const objectInitialAdministrator: IObjectInitialAdministrator = {
         nameAdmin: '',
         event: {
-            name: '',
+            name: solicitation.eventName || '',
             address: {
                 city: '',
                 state: '',
                 street: '',
                 neighborhood: '',
                 number: 'S/N',
-                latitude: -5.18804,
-                longitude: -37.3441
+                latitude: 0,
+                longitude: 0
             },
-            startDate: '',
-            endDate: '',
+            startDate: new Date(),
+            endDate: new Date(),
             openningHour: '',
             closeHour: '',
-            typeEntrance: 'FREE',
+            typeEntrance: solicitation.typeEntrance || 'FREE',
             startPaymentEntranceHour: '',
             valueEntrance: 0,
-            emailAdmin: '',
-            phoneAdmin: '',
+            emailAdmin: solicitation.emailAdmin || '',
+            phoneAdmin: solicitation.phoneAdmin || '',
             sponsors: '',
             hasLounge: false,
             loungeBuyLink: '',

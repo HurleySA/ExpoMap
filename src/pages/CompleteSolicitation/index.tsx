@@ -12,11 +12,27 @@ export const CompleteSolicitation: React.FC = () => {
     const { id }= useParams();
     const [solicitation, setSolicitation] = useState<IEventSolicitation>()
     const [loading, setLoading] = useState<boolean>(false)
+    const [alreadyExistEvent, setAlreadyExistEvent] = useState<boolean>(false);
     const navigate = useNavigate()
 
     const getSolicitation = async (id: string | undefined): Promise<IEventSolicitation> => {
         try {
-            const data = await api.get(`/solicitation/${id}`);
+            const storageToken = window.localStorage.getItem('token');
+            const data = await api.get(`/solicitation/${id}`,  {
+                headers: {
+                    Authorization: `Bearer ${storageToken ?? ``}`, 
+                }
+            });
+            const json = data.data;
+            return json;
+        } catch (err) {
+            return null;
+        }
+    } 
+
+    const getEventBySolicitationId = async (id: string | undefined): Promise<IEventSolicitation> => {
+        try {
+            const data = await api.get(`/event/solicitation/${id}`);
             const json = data.data;
             return json;
         } catch (err) {
@@ -32,6 +48,10 @@ export const CompleteSolicitation: React.FC = () => {
                 navigate('/error')
             }else {
                 setSolicitation(solicitation);
+                const event = await getEventBySolicitationId(id);
+                if(event){
+                    setAlreadyExistEvent(true)
+                }
                 setLoading(false);
             }
 
@@ -42,10 +62,10 @@ export const CompleteSolicitation: React.FC = () => {
     return(
         <Container className="container">
             {
-                loading ? <Title>CARREGANDO</Title> : (
+                loading || !solicitation? <Title>CARREGANDO</Title> : alreadyExistEvent ? <Title>EVENTO JÁ CADASTRADO PARA ESSA SOLICITAÇÃO</Title> : (
                     <>
                         <Title>{solicitation?.eventName}</Title>
-                        <FormAdministrator/>
+                        <FormAdministrator solicitation={solicitation} />
                     </>
                 )
             }

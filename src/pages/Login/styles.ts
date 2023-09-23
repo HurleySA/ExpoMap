@@ -1,4 +1,10 @@
 import styled from "styled-components";
+
+export const ErrorMessage = styled.p`
+    font-size: 1.5rem;
+    color: red;
+    margin: .5rem 0;
+`
 export const ContainerForm = styled.section`
     display: flex;
     flex-direction: column;

@@ -23,7 +23,12 @@ export const SolicitationDetailsCompleteItem: React.FC<ISolicitationDetailsCompl
 
     const handleAccept = async (eventSolicitation) => {
         try {
-            await api.post(`/solicitation/${eventSolicitation.id}/accept`);
+            const storageToken = window.localStorage.getItem('token');
+            await api.post(`/solicitation/${eventSolicitation.id}/accept`, {} , {
+                headers: {
+                    Authorization: `Bearer ${storageToken ?? ``}`, 
+                }
+            });
             window.location.reload();
         } catch (err) {
             console.log(err)
@@ -31,7 +36,12 @@ export const SolicitationDetailsCompleteItem: React.FC<ISolicitationDetailsCompl
     }
     const handleReject = async (eventSolicitation) => {
         try {
-            await api.post(`/solicitation/${eventSolicitation.id}/reject`);
+            const storageToken = window.localStorage.getItem('token');
+            await api.post(`/solicitation/${eventSolicitation.id}/reject`, {},  {
+                headers: {
+                    Authorization: `Bearer ${storageToken ?? ``}`, 
+                }
+            });
             window.location.reload();
         } catch (err) {
             console.log(err)
@@ -88,16 +98,20 @@ export const SolicitationDetailsCompleteItem: React.FC<ISolicitationDetailsCompl
                                     <FlexItem><Information label="Tipo de evento" value={eventTypeText[eventSolicitation.typeEntrance]} /></FlexItem>
                                     <Information label="Descrição do evento " value={"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod ac arcu id cursus. Suspendisse ut feugiat enim. Vestibulum eget vulputate justo. Curabitur ullamcorper ante at ipsum lacinia, at ultricies tellus fringilla. Aenean vehicula sapien id ex facilisis, eget rhoncus nulla bibendum. Nullam auctor, risus in egestas hendrerit, nunc libero convallis elit, a fringilla est elit id justo. Morbi nec quam nec massa pellentesque vulputate. Duis ultrices congue enim, eu scelerisque dui rhoncus in. Nullam nec ipsum nec nisi tristique feugiat vel nec lorem. Vestibulum tincidunt, nunc in vestibulum aliquam, est massa varius sem, eu congue justo ante et ex. Nunc sed malesuada est. Vivamus eleifend, arcu ut consectetur faucibus, arcu justo tristique lorem, in viverra ante erat id urna. Praesent rhoncus lectus vitae quam aliquam, in malesuada sapien lobortis. Nulla facilisi."} />
                                 </Row>
-                                <Row>
-                                    <Button theme="white" hasBorder onClick={() => {
-                                        setOpenModal(true);
-                                        setType('aceitar');
-                                        }} >ACEITAR</Button > 
-                                    <Button theme="green" onClick={() => {
-                                        setOpenModal(true);
-                                        setType('recusar');
-                                    }}>RECUSAR</Button > 
-                                </Row>
+                                {
+                                     (eventSolicitation.status === 'PENDING') &&
+                               
+                                    <Row>
+                                        <Button theme="white" hasBorder onClick={() => {
+                                            setOpenModal(true);
+                                            setType('aceitar');
+                                            }} >ACEITAR</Button > 
+                                        <Button theme="green" onClick={() => {
+                                            setOpenModal(true);
+                                            setType('recusar');
+                                        }}>RECUSAR</Button > 
+                                    </Row>
+                                 }
                             </Section>
                             </>)
             }

@@ -8,12 +8,12 @@ function App() {
 
   return (
     <div className='containerApp'>
-    <Header/>
-      <div className='containerOutlet'>
-        <ToastContainer/>
-        <Outlet/>
+      <Header/>
+        <div className='containerOutlet'>
+            <ToastContainer/>
+            <Outlet/>
+        </div>
       </div>
-    </div>
   )
 }
 
