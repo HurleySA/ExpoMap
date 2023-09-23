@@ -73,13 +73,6 @@ export const EventDetailsCompleteItem: React.FC<IEventDetailsCompleteProps>  = (
                 </Row>
             </Section>
             }
-            <Section>
-                <TitleSection>Contato Administração</TitleSection>
-                <Row>
-                    <FlexItem><Information label="E-mail" value={event.emailAdmin} /></FlexItem>
-                    <FlexItem><Information label="Telefone" value={event.phoneAdmin} /></FlexItem>
-                </Row>
-            </Section>
             <ContainerButton>
                 <Link to={`/programacao/${event.id}`}>
                     <Button theme="white" hasBorder>Ver programação</Button> 

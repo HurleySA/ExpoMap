@@ -15,6 +15,7 @@ export const Container = styled.div`
     }
 
     p {
+        text-align: left;
         line-height: 1.3rem;
         margin-bottom: 0.5rem;
     }

@@ -13,7 +13,6 @@ export const FormAdministrator: React.FC = () => {
 
   const handleSubmit = async (values, solicitationId) => {
     try {
-      console.log(values.event)
       const submitObject = {
         name: values.event.name,
         city: values.event.address.city,
@@ -40,7 +39,6 @@ export const FormAdministrator: React.FC = () => {
         schedules: []
       }
       const event = await api.post('/event', submitObject);
-      console.log('solicitação criada:', event.data.id);
       form.reset();
     } catch (err) {
       console.log(err)

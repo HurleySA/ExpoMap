@@ -2,6 +2,7 @@ import { TextInput, Textarea, SimpleGrid, Group, Title, Button, Select } from '@
 import { useForm } from '@mantine/form';
 import { getInitialValueAdministratorSolicitation } from './utils';
 import { api } from '../../services/api';
+import { toast } from 'react-toastify';
 
 
 export const FormSolicitation: React.FC = () => {
@@ -12,11 +13,11 @@ export const FormSolicitation: React.FC = () => {
 
   const handleSubmit = async (values: any) => {
     try {
-      const solicitation = await api.post('/solicitation', values);
-      console.log('solicitação criada:', solicitation.data.id);
+      await api.post('/solicitation', values);
+      toast.success("Solicitação enviada com sucesso!")
       form.reset();
     } catch (err){
-      console.log('ocorreu um error:', err);
+      toast.error("Erro ao enviar solicitação!")
     }
   }
 

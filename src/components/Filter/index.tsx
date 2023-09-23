@@ -4,14 +4,11 @@ import { SiOpenstreetmap } from 'react-icons/si'
 import { AiOutlineOrderedList } from 'react-icons/ai'
 import { FaFilter } from 'react-icons/fa'
 import { useState } from "react";
-import { Checkbox, Loader } from "@mantine/core"
+import { Checkbox } from "@mantine/core"
 import { stateName } from "../../commons/utils.ts";
 
 export const Filter: React.FC<IFilterProps> = ({mapView, setMapView, events, states, setStates }) => {
-    const [showFilterOptions, setShowFilterOptions] = useState<boolean>(true);
-
-    console.log(states);
-
+    const [showFilterOptions, setShowFilterOptions] = useState<boolean>(false);
 
     const getListOfState = (events: IEvent[]) => {
         const states: string[] = [];
@@ -53,14 +50,13 @@ export const Filter: React.FC<IFilterProps> = ({mapView, setMapView, events, sta
                     <FilterContentContainer  onClick={toggleFilterOptions}>
                         <FaFilter/>
                         <p>Filtrar por estado</p>
-                        <FilterOptionsContainer className={showFilterOptions ? '' : 'disable'}>
+                    </FilterContentContainer>
+                    <FilterOptionsContainer className={showFilterOptions ? '' : 'disable'}>
                         <Checkbox.Group value={states} onChange={handleChange}>
                             <Checkbox value="ALL" label="Todos"/>
                             { listOfStates.map(state => <Checkbox key={state} className='checkbox' value={state} label={stateName[state]}/>)}
                         </Checkbox.Group>
                     </FilterOptionsContainer>
-                    </FilterContentContainer>
-                   
                 </IconContainer>
              }
             </ActionContainer>

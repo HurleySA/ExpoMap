@@ -39,7 +39,6 @@ export const EventDetails = () => {
     const navigate = useNavigate()
     const firstTwoEvents = events.slice(0, 2);
 
-    console.log('f',firstTwoEvents)
     return (
         <Container className="container">
             {

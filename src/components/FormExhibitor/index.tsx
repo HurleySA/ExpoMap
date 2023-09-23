@@ -1,7 +1,7 @@
 import { TextInput, Textarea, SimpleGrid, Group, Title, Button, Select } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { getInitialValueExhibitor } from './utils';
-import { listEvents } from '../../mocks/event';
+import { toast } from 'react-toastify';
 import { IEvent } from '../../commons/dto';
 import { useEffect, useState } from 'react';
 import { api } from '../../services/api';
@@ -13,7 +13,6 @@ interface IParticipateEventProps {
 export const FormExhibitor: React.FC<IParticipateEventProps> = ({eventId}) => {
   const [events, setEvents] = useState<IEvent[]>([]);
   const [loading, setLoading] = useState<boolean>(false)
-
 
   const getEvents = async (): Promise<IEvent[]> => {
       try {
@@ -48,9 +47,19 @@ export const FormExhibitor: React.FC<IParticipateEventProps> = ({eventId}) => {
     },
   });
 
+  const handleSubmit = async (values: any) => {
+    try {
+      await api.post('/solicitation/exhibitor', values);
+      toast.success("Solicitação enviada com sucesso!")
+      form.reset();
+    } catch (err){
+      toast.error("Erro ao enviar solicitação!")
+    }
+  }
+
   const eventsListToSelect = events.map((event) => ({value: event.id, label: event.name}))
   return (
-    <form onSubmit={form.onSubmit(() => console.log(form.values))}>
+    <form onSubmit={form.onSubmit(() => handleSubmit(form.values))}>
       <Title
         order={2}
         size="h1"
