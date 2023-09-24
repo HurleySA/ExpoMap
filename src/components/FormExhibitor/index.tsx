@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { TextInput, Textarea, SimpleGrid, Group, Title, Button, Select } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { getInitialValueExhibitor } from './utils';

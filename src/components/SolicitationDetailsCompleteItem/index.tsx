@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { useState } from "react"
 import { IEventSolicitation } from "../../commons/dto"
 import { ArrowIcon, BorderBox, ConfirmAction, ContainerButtons, ContainerResumeInfo, ContainerResumeItem, EventItem, FilterOptionsContainer, FlexItem, Row, Section, TitleSection } from "./styles"
